@@ -1,6 +1,5 @@
 from language.ryuushi import Kana
 
-
 kanas = {}
 
 
@@ -31,12 +30,13 @@ katakana = {
     "bya": "バャ", "byu": "バュ", "byo": "バョ",
     "pa": "パ", "pi": "ピ", "pu": "プ", "pe": "ペ", "po": "ポ",
     "pya": "パャ", "pyu": "パュ", "pyo": "パョ",
+    "fa": "ファ", "fi": "フィ", "fe": "フェ", "fo": "フォ",
     "ma": "マ", "mi": "ミ", "mu": "ム", "me": "メ", "mo": "モ",
     "mya": "ミャ", "myu": "ミュ", "myo": "ミョ",
     "ya": "ヤ", "yu": "ユ", "yo": "ヨ",
     "ra": "ラ", "ri": "リ", "ru": "ル", "re": "レ", "ro": "ロ",
     "wa": "ワ", "wo": "ヲ", "n": "ン",
-    "v": "ヴ", "va": "ヴァ", "vi": "ヴィ", "vu": "ヴゥ", "ve": "ヴェ", "vo": "ヴォ",
+    "v": "ヴ", "va": "ヴァ", "vi": "ヴ", "vu": "ヴゥ", "ve": "ヴェ", "vo": "ヴォ",
     "dash": "ー"
 }
 
@@ -70,8 +70,33 @@ hiragana = {
     "wa": "わ", "wo": "を", "n": "ん"
 }
 
-
 for prefix, kana_dict in zip(("K_", "H_"), (katakana, hiragana)):
     for na, on in kana_dict.items():
         kana_to_globals(on, prefix + na)
         kanas[on] = globals()[prefix + na]
+
+
+def kanas_list(kana_bun: str) -> list:
+    bun_list = []
+    if kana_bun[0] not in kanas:
+        raise ValueError(f"'{kana_bun[0]}' is not a valid kana.")
+    i = 0
+    while i < len(kana_bun):
+        ichi = kana_bun[i]
+        ni = kana_bun[i+1] if i < len(kana_bun) - 1 else None
+
+        if ni and ichi + ni in kanas:
+            bun_list.append(kanas[ichi+ni])
+            i += 2
+
+        else:
+            for shi in (ichi, ni):
+                if not shi:
+                    break
+                if shi not in kanas:
+                    raise ValueError(f"'{shi}' is not a valid kana.")
+                bun_list.append(kanas[shi])
+                i += 1
+
+    return bun_list
+    # return [kanas[k] for k in kana_bun]

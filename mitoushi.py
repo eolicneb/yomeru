@@ -41,3 +41,14 @@ def insert_tsubu(tsubu, cell, html):
         imi_cell.string = tsubu.imi
         imi_cell['class'] = "imi"
         imi_cell['colspan'] = colspan
+
+
+def insert_bun(tsubu, tag, html):
+    table_div = html.new_tag("div")
+    table_div['class'] = "bun"
+    tag.append(table_div)
+    table = html.new_tag("table")
+    table_div.append(table)
+    bun_row = new_row(table, html)
+    bun_cell = new_cell(bun_row, html)
+    insert_tsubu(tsubu, bun_cell, html)

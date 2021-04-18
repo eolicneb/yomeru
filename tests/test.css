@@ -1,0 +1,39 @@
+body {
+    background-color: black;
+}
+table, tr, td {
+    margin: 0px;
+    border-spacing: 0px;
+    padding: 0px;
+    background-color: #052010;
+}
+tr {
+    text-align: center;
+    vertical-align: top;
+    border:0px;
+}
+td {
+    color: white;
+    text-align:center;
+    height:20px;
+    padding:0px 2px;
+    white-space: nowrap;
+}
+.kao {
+    font-size:24px;
+    height:36px;
+}
+.onsei {
+    font-size:12px;
+    height:20px;
+}
+.imi {
+    border-top:1px solid #808000A0;
+    margin-top:2px;
+}
+.bun {
+    background-color: #052010;
+    overflow: auto;
+    margin-bottom:15px;
+    padding:10px 0;
+}
