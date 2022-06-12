@@ -3,13 +3,14 @@ import pytest
 from language.ryuushi import Iwanai, Kana, Kanji
 from language.tsubu import Tsubu
 from language import kanas
+from parsing_tools import recursive_kanas
 
 from tests import kanji_text
 
 
 @pytest.fixture
 def text():
-    return kanji_text.text()
+    return kanji_text.text()[0]
 
 
 def test_kana():
@@ -92,9 +93,9 @@ def test_imi(text):
     len2len(text)
 
 
-def test_kaku():
-    kakimonou = """ りゅう  し    だ
-   粒    子   、だ
- grain child   is
-    grain      is"""
-    print("\n", kakimonou)
+def test_agrupate(text):
+    big_tsubu = Tsubu(recursive_kanas(text.kao))
+    assert big_tsubu.kao == text.kao
+    extract = big_tsubu._uchiryuu[:7]
+    new_tsubu = big_tsubu.agrupate(extract, imi="Aincrad")
+    assert big_tsubu._uchiryuu[0].imi == "Aincrad"

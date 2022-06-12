@@ -53,17 +53,50 @@ U36948 = type('U36948', (Kanji,), {'_kao': '達', 'imi': 'attain'})
 U24494 = type('U24494', (Kanji,), {'_kao': '微', 'imi': 'fine'})
 U22937 = type('U22937', (Kanji,), {'_kao': '妙', 'imi': 'mysterious'})
 
+#p6
+U21021 = type('U21021', (Kanji,), {'_kao': '初', 'imi': 'first'})
+U25505 = type('U25505', (Kanji,), {'_kao': '採', 'imi': 'pick'})
+U29992 = type('U29992', (Kanji,), {'_kao': '用', 'imi': 'tasks'})
+U20309 = type('U20309', (Kanji,), {'_kao': '何', 'imi': 'what'})
+U30693 = type('U30693', (Kanji,), {'_kao': '知', 'imi': 'know'})
+U20197 = type('U20197', (Kanji,), {'_kao': '以', 'imi': 'by means of'})
+U19978 = type('U19978', (Kanji,), {'_kao': '上', 'imi': 'up'})
+U21069 = type('U21069', (Kanji,), {'_kao': '前', 'imi': 'before'})
+U21516 = type('U21516', (Kanji,), {'_kao': '同', 'imi': 'same'})
+U22763 = type('U22763', (Kanji,), {'_kao': '士', 'imi': 'samurai'})
+
+#p7
+U22827 = type('U22827', (Kanji,), {'_kao': '夫', 'imi': 'man laborer'})
+U23142 = type('U23142', (Kanji,), {'_kao': '婦', 'imi': 'adult woman'})
+U29305 = type('U29305', (Kanji,), {'_kao': '特', 'imi': 'special'})
+U20856 = type('U20856', (Kanji,), {'_kao': '典', 'imi': 'ceremony'})
+U19982 = type('U19982', (Kanji,), {'_kao': '与', 'imi': 'give'})
+U30446 = type('U30446', (Kanji,), {'_kao': '目', 'imi': 'eyes'})
+U24403 = type('U24403', (Kanji,), {'_kao': '当', 'imi': 'present'})
+U22810 = type('U22810', (Kanji,), {'_kao': '多', 'imi': 'many'})
+U30495 = type('U30495', (Kanji,), {'_kao': '真', 'imi': 'true'})
+U38754 = type('U38754', (Kanji,), {'_kao': '面', 'imi': 'face'})
+U19968 = type('U19968', (Kanji,), {'_kao': '一', 'imi': 'one'})
+U29872 = type('U29872', (Kanji,), {'_kao': '環', 'imi': 'ring'})
+U20869 = type('U20869', (Kanji,), {'_kao': '内', 'imi': 'inside'})
+U20363 = type('U20363', (Kanji,), {'_kao': '例', 'imi': 'example'})
+
 # iwanai
-comma = type("Comma", (Iwanai,), {'_kao': "、"})()
 stop = type("Stop", (Iwanai,), {'_kao': "。"})()
+comma = type("Comma", (Iwanai,), {'_kao': "、"})()
 midpoint = type("Midpoint", (Iwanai,), {'_kao': "・"})()
 parenth_o = type("parenth_open", (Iwanai,), {'_kao': "("})()
 parenth_c = type("parenth_close", (Iwanai,), {'_kao': ")"})()
+chevron_o = type("chevron_open", (Iwanai,), {'_kao': "《"})()
+chevron_c = type("chevron_close", (Iwanai,), {'_kao': "》"})()
 
-kanjis = {}
+kanjis, iwanai = {}, {}
 
 locals_copy = list(locals().values())
 
-for kanji_class in locals_copy:
-    if isinstance(kanji_class, type) and issubclass(kanji_class, Kanji):
-        kanjis[kanji_class._kao] = kanji_class
+for local_obj in locals_copy:
+    if isinstance(local_obj, type) and issubclass(local_obj, Kanji):
+        kanjis[local_obj._kao] = local_obj
+
+    elif isinstance(local_obj, Iwanai):
+        iwanai[local_obj._kao] = local_obj

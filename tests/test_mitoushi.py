@@ -29,7 +29,6 @@ def test_table(text, caplog):
         f.write(doc.prettify())
 
 
-
 def test_to_json(text):
     from pprint import pprint
     json_tsubu = [to_json(bun) for bun in text]

@@ -1,0 +1,29 @@
+from language.kanas import kanas, kanas_list
+from language.ryuushi import Ryuushi
+from language.tsubu import Tsubu
+from text.used_kanjis import *
+
+kao = "ここに文を入れってください。"
+
+U25991 = type('U25991', (Kanji,), {'_kao': '文', 'imi': 'sentence'})
+U20837 = type('U20837', (Kanji,), {'_kao': '入', 'imi': 'enter'})
+
+in_here = Tsubu(kanas_list("ここに"), imi="in here")
+
+sentence = Tsubu([U25991()], onsei=["ぶん"], imi="sentence")
+
+enter = Tsubu([U20837()], imi="enter")
+insert = Tsubu([enter, kanas['れ'], kanas['っ'], kanas['て']],
+               onsei=["い", None, None, None],
+               imi="insert-te")
+please = Tsubu(kanas_list("ください"), imi="please")
+please_insert = Tsubu([insert, please], imi="please insert")
+
+temp = Ryuushi()
+temp._kao = ""
+
+honbun = Tsubu([in_here, sentence, kanas['を'], please_insert, stop],
+               imi="Insert a sentence here, please.")
+
+assert honbun.kao == kao, (f"honbun's kao is different from original"
+                           f"\n{honbun.kao}\n{kao}")

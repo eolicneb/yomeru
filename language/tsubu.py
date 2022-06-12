@@ -20,8 +20,8 @@ class Tsubu(Ryuushi):  # 粒: grain
     @onsei.setter
     def onsei(self, onsei):
         assert self.hyoushi == len(onsei), (
-                 f"'onsei' length ({len(onsei)}) different"
-                 f" from self lenght ({self.hyoushi})")
+            f"'onsei' length ({len(onsei)}) different"
+            f" from self lenght ({self.hyoushi})")
         point = 0
         for ryuushi in self._uchiryuu:
             if isinstance(ryuushi, Iwanai):
@@ -49,3 +49,13 @@ class Tsubu(Ryuushi):  # 粒: grain
             self._hyoushi = sum(ryuushi.hyoushi
                                 for ryuushi in self._uchiryuu)
         return self._hyoushi
+
+    def agrupate(self, tsubugun: list,
+                  onsei=None, imi=None):  # 粒群: group of grains
+        assert all(ko in self._uchiryuu for ko in tsubugun)
+        anchor = self._uchiryuu.index(tsubugun[0])
+        for ko in tsubugun:
+            self._uchiryuu.remove(ko)
+        new_tsubu = Tsubu(tsubugun, onsei=onsei, imi=imi)
+        self._uchiryuu.insert(anchor, new_tsubu)
+        return new_tsubu

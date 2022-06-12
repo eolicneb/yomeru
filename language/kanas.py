@@ -29,7 +29,7 @@ katakana = {
     "ba": "バ", "bi": "ビ", "bu": "ブ", "be": "ベ", "bo": "ボ",
     "bya": "バャ", "byu": "バュ", "byo": "バョ",
     "pa": "パ", "pi": "ピ", "pu": "プ", "pe": "ペ", "po": "ポ",
-    "pya": "パャ", "pyu": "パュ", "pyo": "パョ",
+    "pya": "パャ", "pyu": "ピュ", "pyo": "パョ",
     "fa": "ファ", "fi": "フィ", "fe": "フェ", "fo": "フォ",
     "ma": "マ", "mi": "ミ", "mu": "ム", "me": "メ", "mo": "モ",
     "mya": "ミャ", "myu": "ミュ", "myo": "ミョ",
@@ -42,7 +42,7 @@ katakana = {
 
 hiragana = {
     "a": "あ", "i": "い", "u": "う", "e": "え", "o": "お",
-    "ka": "か", "ki": "き", "ku": "く", "ke": "け", "ko": "こ",
+    "ka": "か", "ki": "き", "ku": "く", "ke": "", "ko": "こ",
     "kya": "きゃ", "kyu": "きゅ", "kyo": "きょ",
     "ga": "が", "gi": "ぎ", "gu": "ぐ", "ge": "げ", "go": "ご",
     "gya": "ぎゃ", "gyu": "ぎゅ", "gyo": "ぎょ",
@@ -77,26 +77,23 @@ for prefix, kana_dict in zip(("K_", "H_"), (katakana, hiragana)):
 
 
 def kanas_list(kana_bun: str) -> list:
-    bun_list = []
-    if kana_bun[0] not in kanas:
-        raise ValueError(f"'{kana_bun[0]}' is not a valid kana.")
+    kanas_list.bun_list = []
     i = 0
+    kanas_list.index = i
     while i < len(kana_bun):
         ichi = kana_bun[i]
         ni = kana_bun[i+1] if i < len(kana_bun) - 1 else None
 
         if ni and ichi + ni in kanas:
-            bun_list.append(kanas[ichi+ni])
+            kanas_list.bun_list.append(kanas[ichi+ni])
             i += 2
+            kanas_list.index = i
 
         else:
-            for shi in (ichi, ni):
-                if not shi:
-                    break
-                if shi not in kanas:
-                    raise ValueError(f"'{shi}' is not a valid kana.")
-                bun_list.append(kanas[shi])
-                i += 1
+            if ichi not in kanas:
+                raise ValueError(f"'{ichi}' is not a valid kana.")
+            kanas_list.bun_list.append(kanas[ichi])
+            i += 1
+            kanas_list.index = i
 
-    return bun_list
-    # return [kanas[k] for k in kana_bun]
+    return kanas_list.bun_list
