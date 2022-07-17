@@ -13,6 +13,10 @@ class Tsubu(Ryuushi):  # 粒: grain
             self.onsei = onsei
 
     @property
+    def uchiryuu(self):
+        return self._uchiryuu
+
+    @property
     def onsei(self):
         return "".join(ryuushi.onsei for ryuushi in self._uchiryuu
                        if not isinstance(ryuushi, Iwanai))
@@ -39,8 +43,7 @@ class Tsubu(Ryuushi):  # 粒: grain
 
     def __len__(self):
         if not self._len:
-            self._len = sum(len(ryuushi)
-                            for ryuushi in self._uchiryuu)
+            self._len = sum(len(ryuushi)  for ryuushi in self._uchiryuu)
         return self._len
 
     @property
@@ -50,8 +53,7 @@ class Tsubu(Ryuushi):  # 粒: grain
                                 for ryuushi in self._uchiryuu)
         return self._hyoushi
 
-    def agrupate(self, tsubugun: list,
-                  onsei=None, imi=None):  # 粒群: group of grains
+    def agrupate(self, tsubugun: list, onsei=None, imi=None):  # 粒群: group of grains
         assert all(ko in self._uchiryuu for ko in tsubugun)
         anchor = self._uchiryuu.index(tsubugun[0])
         for ko in tsubugun:

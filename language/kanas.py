@@ -3,9 +3,12 @@ from language.ryuushi import Kana
 kanas = {}
 
 
+def make_kana_type(kana_str, kana_name):
+    return type(kana_name, (Kana,), {'_kao': kana_str})
+
+
 def kana_to_globals(kana_str, kana_name):
-    globals()[kana_name] = type(
-        kana_name, (Kana,), {'_kao': kana_str})()
+    globals()[kana_name] = make_kana_type(kana_str, kana_name)()
 
 
 katakana = {
@@ -73,7 +76,7 @@ hiragana = {
 for prefix, kana_dict in zip(("K_", "H_"), (katakana, hiragana)):
     for na, on in kana_dict.items():
         kana_to_globals(on, prefix + na)
-        kanas[on] = globals()[prefix + na]
+        kanas[on] = make_kana_type(on, prefix + na)()
 
 
 def kanas_list(kana_bun: str) -> list:

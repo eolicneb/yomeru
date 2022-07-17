@@ -1,4 +1,8 @@
+from re import compile
 from .ryuushi import Kanji
+
+
+kanji_regex = compile(r'[\x3400-\x4DB5\x4E00-\x9FCB\xF900-\xFA6A]')
 
 
 class KanjisDict(dict):
@@ -17,9 +21,8 @@ class KanjisDict(dict):
     def make_kanji(self, kao):
         kao_key = ord(kao)
 
-
     def ask_attributes(self, kao):
-        assert isinstance(kao, str)
+        assert isinstance(kao, str) and is_kanji(kao)
         attrs = {'_kao': kao}
         print(f"Attributes for {kao}:")
         for attr, type_ in self.__attribs.items():
@@ -29,3 +32,7 @@ class KanjisDict(dict):
                 value = [val.strip() for val in value.split(",")]
             attrs[attr] = value
         return attrs
+
+
+def is_kanji(char):
+    return bool(kanji_regex.match(char))

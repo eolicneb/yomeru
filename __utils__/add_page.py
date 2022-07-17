@@ -7,8 +7,7 @@ import shutil
 class AddPage:
     def __init__(self, text_dir: str, base_page_path: str):
         assert os.path.isdir(text_dir), f"'{text_dir}' not valid path."
-        assert os.path.isfile(base_page_path), \
-            f"'{base_page_path}' not valid path."
+        assert os.path.isfile(base_page_path), f"'{base_page_path}' not valid path."
         self.root = text_dir
         self.page_path = base_page_path
 

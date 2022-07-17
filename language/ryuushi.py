@@ -42,6 +42,10 @@ class Kana(Ryuushi):  # 仮名: (lit: provisional name)
 
 
 class Kanji(Ryuushi):
+    """
+    This class is intended to be passed as a type, so that different positions where a Kanji is used
+    can receive a different .onsei and a different .imi.
+    """
     _kao = "〇"
     radical = "〇"
     hint = "no hint"
