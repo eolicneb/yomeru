@@ -43,6 +43,9 @@ class Tsubu(Ryuushi):  # 粒: grain
                             for ryuushi in self._uchiryuu)
         return self._len
 
+    def __iter__(self):
+        return iter(self._uchiryuu)
+
     @property
     def hyoushi(self):  # 拍子: rhythm (musical tempo)
         if not self._hyoushi:

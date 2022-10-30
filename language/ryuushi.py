@@ -53,3 +53,7 @@ class Kanji(Ryuushi):
         super().__init__()
         self.imi = self.imi if self.imi else ""
         self.onsei = self.onsei if self.onsei else ""
+
+    @property
+    def kao(self):
+        return self._kao
