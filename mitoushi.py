@@ -1,3 +1,6 @@
+from language.ryuushi import Kanji
+
+
 def new_cell(row, html):
     cell = html.new_tag('td')
     row.append(cell)
@@ -13,6 +16,7 @@ def new_row(table, html):
 def insert_tsubu(tsubu, cell, html):
     new_table = html.new_tag('table')
     new_table['imi'] = tsubu.imi
+    new_table['id'] = tsubu.id
     cell.append(new_table)
 
     if hasattr(tsubu, '_uchiryuu'):
@@ -31,7 +35,7 @@ def insert_tsubu(tsubu, cell, html):
         kao_row = new_row(new_table, html)
         kao_cell = new_cell(kao_row, html)
         kao_cell.string = tsubu.kao
-        kao_cell['class'] = "kao"
+        kao_cell['class'] = "kao kanji" if isinstance(tsubu, Kanji) else "kao"
 
         colspan = 1
 

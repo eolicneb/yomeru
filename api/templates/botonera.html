@@ -1,0 +1,23 @@
+{% extends "translation.html" %}
+{% block botonera %}
+<div class="botonera">
+    <span><button onclick="perform_unwrap()">unwrap</button></span>
+    <form id="merge_form">
+        <span name="text_input_container">
+            <div id="imi_input_container">
+                <span class="light_label">imi:</span>
+                <input type="text" name="new_imi" value="new imi"></input>
+            </div>
+            <div id="onsei_input_container">
+                <span class="light_label">onsei:</span>
+                <input type="text" name="new_onsei" placeholder="おんせい"></input>
+            </div>
+        </span>
+        <span><input type="submit">set imi</input></span>
+        <span id="range_kao_container">
+            <span class="light_label">range kao:</span>
+            <span id="range_kao"></span>
+        </span>
+    </form>
+</div>
+{% endblock %}

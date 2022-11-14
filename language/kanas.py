@@ -5,7 +5,7 @@ kanas = {}
 
 def kana_to_globals(kana_str, kana_name):
     globals()[kana_name] = type(
-        kana_name, (Kana,), {'_kao': kana_str})()
+        kana_name, (Kana,), {'_kao': kana_str})
 
 
 katakana = {
@@ -85,14 +85,14 @@ def kanas_list(kana_bun: str) -> list:
         ni = kana_bun[i+1] if i < len(kana_bun) - 1 else None
 
         if ni and ichi + ni in kanas:
-            kanas_list.bun_list.append(kanas[ichi+ni])
+            kanas_list.bun_list.append(kanas[ichi+ni]())
             i += 2
             kanas_list.index = i
 
         else:
             if ichi not in kanas:
                 raise ValueError(f"'{ichi}' is not a valid kana.")
-            kanas_list.bun_list.append(kanas[ichi])
+            kanas_list.bun_list.append(kanas[ichi]())
             i += 1
             kanas_list.index = i
 

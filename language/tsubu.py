@@ -1,3 +1,4 @@
+from __future__ import annotations
 from language.ryuushi import Ryuushi, Iwanai
 
 
@@ -8,6 +9,7 @@ class Tsubu(Ryuushi):  # 粒: grain
         self._len = None
         self._hyoushi = None  # 拍子: rhythm (musical tempo)
         self._uchiryuu = uchiryuu  # 内粒: inner grains
+        super().__init__()
         self.imi = imi
         if onsei:
             self.onsei = onsei
@@ -19,9 +21,12 @@ class Tsubu(Ryuushi):  # 粒: grain
 
     @onsei.setter
     def onsei(self, onsei):
-        assert self.hyoushi == len(onsei), (
-            f"'onsei' length ({len(onsei)}) different"
-            f" from self lenght ({self.hyoushi})")
+        if onsei is None:
+            onsei = [None] * self.hyoushi
+        else:
+            assert self.hyoushi == len(onsei), (
+                f"'onsei' length ({len(onsei)}) different"
+                f" from self lenght ({self.hyoushi})")
         point = 0
         for ryuushi in self._uchiryuu:
             if isinstance(ryuushi, Iwanai):
@@ -53,8 +58,11 @@ class Tsubu(Ryuushi):  # 粒: grain
                                 for ryuushi in self._uchiryuu)
         return self._hyoushi
 
-    def agrupate(self, tsubugun: list,
-                  onsei=None, imi=None):  # 粒群: group of grains
+    @hyoushi.setter
+    def hyoushi(self, _):
+        return
+
+    def agrupate(self, tsubugun: list, onsei=None, imi=None):  # 粒群: group of grains
         assert all(ko in self._uchiryuu for ko in tsubugun)
         anchor = self._uchiryuu.index(tsubugun[0])
         for ko in tsubugun:
@@ -62,3 +70,10 @@ class Tsubu(Ryuushi):  # 粒: grain
         new_tsubu = Tsubu(tsubugun, onsei=onsei, imi=imi)
         self._uchiryuu.insert(anchor, new_tsubu)
         return new_tsubu
+
+    def explode(self, uchiryuu: Tsubu):
+        assert uchiryuu in self._uchiryuu
+        anchor = self._uchiryuu.index(uchiryuu)
+        self._uchiryuu.pop(anchor)
+        for tsubu in uchiryuu._uchiryuu[::-1]:
+            self._uchiryuu.insert(anchor, tsubu)

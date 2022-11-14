@@ -20,12 +20,12 @@ marriage_system = Tsubu([chevron_o, marriage, *kanas_list("システム"), chevr
 recruitment = Tsubu([kanjis['採'](), kanjis['用']()],
                     onsei=["さい", "よう"], imi="recruitment")
 adopted = Tsubu([recruitment, *kanas_list("した")], imi="adopted")
-adopted_system = Tsubu([marriage_system, kanas['を'], adopted])
+adopted_system = Tsubu([marriage_system, kanas['を'](), adopted])
 
 game_title = Tsubu(kanas_list("ゲームタイトル"), imi="game title")
 
 first_title_adopting = Tsubu([in_the_beginning, adopted_system,
-                              game_title, kanas['が']],
+                              game_title, kanas['が']()],
                              imi=("the first game title that "
                                   "adopted the marriage system"))
 
@@ -48,7 +48,7 @@ more_than = Tsubu([kanjis['以'](), kanjis['上']()],
                   onsei=["い", "じょう"], imi="more than")
 before = Tsubu([kanjis['前']()], onsei=["まえ"], imi="before")
 twenty_and_less = Tsubu([already, twentys, more_than,
-                         kanas['も'], before, *kanas_list("から")],
+                         kanas['も'](), before, *kanas_list("から")],
                         imi="those with 20 years and even less")
 MMO = Ryuushi()
 MMO._kao = "ＭＭＯ"
@@ -63,18 +63,18 @@ to_each_other = Tsubu([kanjis['同'](), kanjis['士']()],
                      onsei=["どう", "し"], imi="to each other")
 marriage = Tsubu([kanjis['結'](), kanjis['婚']()],
                  onsei=["けっ", "こん"], imi="marriage")
-marriage_mmo = Tsubu([world_character, to_each_other, kanas['の'], marriage],
+marriage_mmo = Tsubu([world_character, to_each_other, kanas['の'](), marriage],
                      imi="marriage between characters of MMO worlds")
 
 very = Tsubu(kanas_list("とても"), imi="very")
 popular = Tsubu(kanas_list("ポピュラー"), imi="popular")
 thing = Tsubu(kanas_list("もの"), imi="thing")
-popular_thing = Tsubu([very, popular, kanas['な'], thing],
+popular_thing = Tsubu([very, popular, kanas['な'](), thing],
                       imi="a very popular thing")
 is_becoming = Tsubu(kanas_list("なっている"), imi="is becoming")
 
 marriage_becoming = Tsubu([twenty_and_less, comma, marriage_mmo,
-                           kanas['は'], popular_thing, kanas['に'], is_becoming],
+                           kanas['は'](), popular_thing, kanas['に'](), is_becoming],
                           imi="for people in their 20s and even younger, "
                               "marriage between MMO world characters is "
                               "becoming very popular.")
@@ -82,7 +82,7 @@ marriage_becoming = Tsubu([twenty_and_less, comma, marriage_mmo,
 temp = Ryuushi()
 temp._kao = ""
 
-honbun = Tsubu([if_first_title, kanas['が'], comma, marriage_becoming, stop])
+honbun = Tsubu([if_first_title, kanas['が'](), comma, marriage_becoming, stop])
 
 assert honbun.kao == kao, (f"honbun's kao is different from original"
                            f"\n{honbun.kao}\n{kao}")

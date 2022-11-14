@@ -1,10 +1,16 @@
+from uuid import uuid1
+
+
 class Ryuushi:  # 粒子: particle
+    get = {}
     _kao = "-"
 
     def __init__(self):
+        self.id = uuid1().hex
         self.onsei = None  # 音声: sound, voice
         self.imi = ""  # 意味: meaning
         self.hyoushi = 1
+        Ryuushi.get[self.id] = self
 
     @property
     def kao(self):

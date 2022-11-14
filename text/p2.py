@@ -25,13 +25,13 @@ one_hand_sword = Tsubu([one_hand, sword], imi="one-handed sword")
 man = kanjis['使']()
 man.onsei = "つか"
 man.imi = "user"
-sword_wielder = Tsubu([one_hand_sword, man, kanas.kanas['い']],
+sword_wielder = Tsubu([one_hand_sword, man, kanas.kanas['い']()],
                       imi="one-handed sword wielder")
 swordman = Tsubu([parenth_o, *kanas.kanas_list("ソードマン"), parenth_c],
                  imi="swordman")
 kirito = Tsubu(kanas.kanas_list("キリト"), imi="Kirito")
 me_kirito = Tsubu([me, level96, sword_wielder, swordman,
-                   kirito, kanas.kanas['は'], comma],
+                   kirito, kanas.kanas['は'](), comma],
                   imi="I, the level 96 one-handed sword wielder Kirito,")
 
 level94 = Tsubu([*kanas.kanas_list("レベル"),
@@ -41,7 +41,7 @@ level94 = Tsubu([*kanas.kanas_list("レベル"),
                 imi="level 94")
 rapier = Tsubu([kanjis['細'](), kanjis['剣']()],
                onsei=["ほそ", "けん"], imi="rapier")
-rapier_wielder = Tsubu([rapier, man, kanas.kanas['い']],
+rapier_wielder = Tsubu([rapier, man, kanas.kanas['い']()],
                        imi="rapier wielder")
 fencer = Tsubu([parenth_o, *kanas.kanas_list("フェンサー"), parenth_c],
                imi="fencer")
@@ -51,10 +51,10 @@ proposal = Tsubu([kanjis['求'](), kanjis['婚']()],
                  onsei=["きゅう", "こん"], imi="proposal")
 propose = Tsubu([parenth_o, *kanas.kanas_list("プロポーズ"), parenth_c],
                 imi="propose")
-marriage_proposal = Tsubu([proposal, propose, kanas.kanas['し']],
+marriage_proposal = Tsubu([proposal, propose, kanas.kanas['し']()],
                           imi="marriage proposal")
 to_asuna = Tsubu([level94, rapier_wielder, fencer, asuna,
-                  kanas.kanas['に'], marriage_proposal, comma],
+                  kanas.kanas['に'](), marriage_proposal, comma],
                  imi="proposal to the level 94 fencer Asuna,")
 
 consent = Tsubu([kanjis['承'](), kanjis['諾']()],

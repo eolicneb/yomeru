@@ -17,7 +17,7 @@ within_real_world = Tsubu([real_world, *kanas_list("では")],
                           imi="within the real world")
 me = Tsubu([kanjis['俺']()], onsei=["おれ"], imi="me")
 asuna = Tsubu(kanas_list("アスナ"), imi="Asuna")
-asuna_and_i = Tsubu([me, kanas['と'], asuna, kanas['は']],
+asuna_and_i = Tsubu([me, kanas['と'](), asuna, kanas['は']()],
                     imi="Asuna and I")
 
 face = Tsubu([kanjis['顔']()], onsei=["かお"], imi="face")
@@ -26,20 +26,20 @@ could_conbine = Tsubu([fit, *kanas_list("わせた")],
                     imi="could combine")
 this = Tsubu(kanas_list("こと"), imi="this")
 not_even = Tsubu(kanas_list("さえなく"), imi="not even")
-not_face_to_face = Tsubu([face, kanas['を'], could_conbine,
+not_face_to_face = Tsubu([face, kanas['を'](), could_conbine,
                           this, not_even],
                          imi="couldn't even see face to face")
 
 first = Tsubu(kanas_list("そもそも"), imi="in first place")
 
-me2 = Tsubu([kanjis['俺'](), kanas['は']],
+me2 = Tsubu([kanjis['俺'](), kanas['は']()],
             onsei=["おれ", None], imi="I")
-in_legal = Tsubu([kanjis['法'](), kanjis['的'](), kanas['に']],
+in_legal = Tsubu([kanjis['法'](), kanjis['的'](), kanas['に']()],
                  onsei=["ほう", "てき", None], imi="in legal")
 marriage = Tsubu([kanjis['結'](), kanjis['婚']()],
                  onsei=["けっ", "こん"], imi="marriage")
 possible = Tsubu(kanas_list("できる"), imi="possible")
-in_age = Tsubu([kanjis['年'](), kanjis['齢'](), kanas['に']],
+in_age = Tsubu([kanjis['年'](), kanjis['齢'](), kanas['に']()],
                onsei=["ねん", "れい", None], imi="in age")
 legal_age = Tsubu([in_legal, marriage, possible, in_age],
                   imi="in legal age to get married")
