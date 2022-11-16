@@ -3,8 +3,30 @@ from flask import Flask, render_template, request
 from language.ryuushi import Ryuushi, Kanji
 from mitoushi import insert_bun
 import tests.kanji_text as test_text
+from database.models import db
 
-app = Flask(__name__)
+
+def create_test_app():
+    app = Flask(__name__)
+    app.config['TESTING'] = True
+    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite://'
+    # Dynamically bind SQLAlchemy to application
+    db.init_app(app)
+    app.app_context().push()  # this does the binding
+    return app
+
+
+# you can create another app context here, say for production
+def create_production_app():
+    app = Flask(__name__)
+    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///yomeru.db'
+    # Dynamically bind SQLAlchemy to application
+    db.init_app(app)
+    app.app_context().push()
+    return app
+
+
+app = create_production_app()
 
 
 def make_doc(text):
